@@ -20,11 +20,11 @@ import com.blooging.blog.payloads.ApiResponce;
 import com.blooging.blog.payloads.UserDto;
 import com.blooging.blog.services.UserService;
 
-@RestController
+@RestController // it indicates that this class is a RESTful web service  controller
 @RequestMapping("/api/users")
 public class UserController {
 
-	@Autowired
+	@Autowired //used for automatic dependency injection or it asks for bean for an object to inject dependency 
 	private UserService userService;
 
 	// POST-CREATE USER

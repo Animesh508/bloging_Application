@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.blooging.blog.payloads.ApiResponce;
 
 @ControllerAdvice
-@RestControllerAdvice
+@RestControllerAdvice //used to handle Rest API Execption Across All rest contoller 
 public class GlobalExceptionHandler {
 	@ExceptionHandler(UserAlreadyExistsException.class)
 	public ResponseEntity<ApiResponce> handleUserAlreadyExistException(UserAlreadyExistsException ex){

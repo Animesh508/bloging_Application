@@ -15,22 +15,22 @@ import com.blooging.blog.payloads.UserDto;
 import com.blooging.blog.repositories.UserRepo;
 import com.blooging.blog.services.UserService;
 
-
-@Service
+@Service // is a Spring annotation used to mark a class as a service layer component,
+			// meaning it contains business logic.
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepo userRepo;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
-		//if user already exist the this is what will run
+		// if user already exist the this is what will run
 		Optional<User> existingUser = userRepo.findByEmail(userDto.getEmail());
-		if(existingUser.isPresent()) {
-			throw new UserAlreadyExistsException("User with email "+ userDto.getEmail()+ " already exsist");
+		if (existingUser.isPresent()) {
+			throw new UserAlreadyExistsException("User with email " + userDto.getEmail() + " already exsist");
 		}
 		// conversion of userDto to user
 		User user = this.dtoToUser(userDto);
@@ -86,10 +86,9 @@ public class UserServiceImpl implements UserService {
 //		user.setEmail(userDto.getEmail());
 //		user.setPassword(userDto.getPassword());
 //		user.setAbout(userDto.getAbout());
-		
+
 		User user = this.modelMapper.map(userDto, User.class);
-		
-		
+
 		return user;
 	}
 
@@ -101,7 +100,7 @@ public class UserServiceImpl implements UserService {
 //		userDto.setEmail(user.getEmail());
 //		userDto.setPassword(user.getPassword());
 //		userDto.setAbout(user.getAbout());
-		
+
 		UserDto userDto = this.modelMapper.map(user, UserDto.class);
 
 		return userDto;

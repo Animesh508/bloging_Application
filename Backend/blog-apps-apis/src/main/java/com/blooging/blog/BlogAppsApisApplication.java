@@ -12,7 +12,7 @@ public class BlogAppsApisApplication {
 		SpringApplication.run(BlogAppsApisApplication.class, args);
 	}
 	
-	@Bean
+	@Bean // A normal Java object that Spring creates, manages, and gives to you when you need it.
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
