@@ -20,6 +20,8 @@ import com.blooging.blog.payloads.ApiResponce;
 import com.blooging.blog.payloads.UserDto;
 import com.blooging.blog.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController // it indicates that this class is a RESTful web service  controller
 @RequestMapping("/api/users")
 public class UserController {
@@ -28,16 +30,16 @@ public class UserController {
 	private UserService userService;
 
 	// POST-CREATE USER
-	// created UserDto to not directely expose User
+	// created UserDto to not directly expose User
 	@PostMapping("/")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
 		UserDto createdUserDto = this.userService.createUser(userDto);
 		return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
 	}
 
 	// PUT - UPDATE USER
 	@PutMapping("/{userId}")
-	public ResponseEntity<UserDto> UpdateUser(@RequestBody UserDto userDto, @PathVariable("userId") Integer userId) {
+	public ResponseEntity<UserDto> UpdateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer userId) {
 		UserDto updateUserDto = this.userService.updateUser(userDto, userId);
 		return ResponseEntity.ok(updateUserDto);
 
